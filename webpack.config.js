@@ -15,13 +15,9 @@ var reactDOMExternal = {
 }
 
 module.exports = {
-  entry: {
-    'react-token': './src/index.js',
-    'react-token.min': './src/index.js'
-  },
+  entry: './src/index.js',
   externals: {
-    'react': reactExternal,
-    'react-dom': reactDOMExternal
+    'react': 'commonjs react'
   },
   output: {
     filename: '[name].js',
