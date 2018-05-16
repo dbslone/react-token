@@ -28,7 +28,7 @@ module.exports = {
     chunkFilename: '[id].chunk.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    libraryTarget: 'umd',
+    libraryTarget: 'commonjs2',
     library: 'ReactToken'
   },
   optimization: {
