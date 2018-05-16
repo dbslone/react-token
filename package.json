@@ -2,20 +2,15 @@
   "name": "react-token",
   "version": "0.0.6",
   "description": "Token/Tag input component",
-  "main": "./src/index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/dbslone/react-token.git"
   },
   "homepage": "https://github.com/dbslone/react-token",
   "bugs": "https://github.com/dbslone/react-token/issues",
-  "directories": {
-    "example": "examples"
-  },
   "scripts": {
     "start": "start-storybook -p 9001 -c .storybook",
-    "test": "cross-env NODE_ENV=test karma start",
-    "lint": "eslint src/ specs/",
     "build": "webpack --mode production"
   },
   "authors": [
