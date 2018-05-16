@@ -1,7 +1,7 @@
 {
   "name": "react-token",
   "version": "0.0.1",
-  "description": "Token input component",
+  "description": "Token/Tag input component",
   "main": "./src/index.js",
   "repository": {
     "type": "git",
@@ -70,12 +70,15 @@
   "tags": [
     "react",
     "token",
-    "input"
+    "input",
+    "tag"
   ],
   "keywords": [
     "react",
     "react-component",
     "token",
-    "token-input"
+    "token-input",
+    "tag",
+    "tag-input"
   ]
 }
