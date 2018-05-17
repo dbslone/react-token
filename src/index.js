@@ -325,5 +325,5 @@ class ReactToken extends React.Component {
   }
 }
 
-// export default ReactToken
-module.exports = ReactToken
+export default ReactToken
+// module.exports = ReactToken
