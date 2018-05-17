@@ -37,7 +37,8 @@ class DefaultToken extends React.PureComponent {
         paddingBottom: 3,
         paddingLeft: 8,
         paddingRight: 8,
-        paddingTop: 3
+        paddingTop: 3,
+        minHeight: 23
       },
       text: {
         paddingRight: 10,
