@@ -316,7 +316,7 @@ class ReactToken extends React.Component {
             </div>
           </li>
           {shouldRenderAutocomplete && this.renderAutoComplete()}
-          {this.renderRequired()}
+          {this.props.required && this.renderRequired()}
         </ul>
       </div>
     );
