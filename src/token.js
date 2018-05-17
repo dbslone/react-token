@@ -16,7 +16,6 @@ class DefaultToken extends React.PureComponent {
   }
 
   onMouseEnter = (e) => {
-    console.log('enter')
     this.setState({hover: true})
   }
 
@@ -27,17 +26,18 @@ class DefaultToken extends React.PureComponent {
   render() {
     const styles = {
       container: {
-        display: 'inline-block',
-        paddingLeft: 8,
-        paddingRight: 8,
-        paddingTop: 3,
-        paddingBottom: 3,
+        alignItems: 'center',
         backgroundColor: '#000000',
         borderRadius: '3px',
         color: 'rgba(255,255,255,1)',
+        display: 'inline-flex',
+        marginBottom: 2,
         marginRight: 6,
         marginTop: 2,
-        marginBottom: 2,
+        paddingBottom: 3,
+        paddingLeft: 8,
+        paddingRight: 8,
+        paddingTop: 3
       },
       text: {
         paddingRight: 10,

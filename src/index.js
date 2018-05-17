@@ -55,6 +55,12 @@ class ReactToken extends React.Component {
     window.addEventListener('click', this.onClick)
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.selected !== nextProps.selected) {
+      this.setState({tokens: nextProps.selected})
+    }
+  }
+
   componentWillUnmount() {
     window.removeEventListener('click', this.onClick)
   }
@@ -81,23 +87,29 @@ class ReactToken extends React.Component {
     })
   }
 
+  onKeyDown = (e) => {
+    if ([this.keyMap.DOWN_ARROW, this.keyMap.UP_ARROW, this.keyMap.ENTER].includes(e.keyCode)) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+  }
+
   onKeyUp = (e) => {
-    e.preventDefault() && e.stopPropagation()
+    e.preventDefault()
 
     if (e.keyCode === this.keyMap.ENTER && this.input.value.length > 0) {
       const value = this.state.selectedAutocompleteIdx >= 0
         ? this.props.autocompleteOptions[this.state.selectedAutocompleteIdx]
         : this.input.value
-
       this.setState({
         selectedAutocompleteIdx: -1,
         tokens: [...this.state.tokens, value],
         inputValue: '',
         hideAutocomplete: false
-      }, () => {
-        this.props.onAdd(this.input.value)
-        this.input.value = ''
       })
+      this.props.onAdd(value)
+      this.input.value = ''
+      this.input.focus()
     } else if (e.keyCode === this.keyMap.BACKSPACE && this.state.inputValue.length === 0) {
       this.removeToken(this.state.tokens.length - 1)()
       this.setState({inputValue: ''})
@@ -108,11 +120,13 @@ class ReactToken extends React.Component {
         ? 0
         : this.state.selectedAutocompleteIdx + 1
       this.setState({selectedAutocompleteIdx: nextIdx})
+      this.suggestions.childNodes[nextIdx].focus()
     } else if (e.keyCode === this.keyMap.UP_ARROW  && this.state.inputValue !== '') {
       const nextIdx = this.state.selectedAutocompleteIdx - 1 < 0
         ? this.props.autocompleteOptions.length - 1
         : this.state.selectedAutocompleteIdx - 1
       this.setState({selectedAutocompleteIdx: nextIdx})
+      this.suggestions.childNodes[nextIdx].focus()
     } else {
       this.setState({
         inputWidth: this.calcWidth(this.input.value),
@@ -122,7 +136,9 @@ class ReactToken extends React.Component {
       })
     }
 
-    this.props.onKeyUp(e)
+    if (e.target === this.input) {
+      this.props.onKeyUp(e)
+    }
   }
 
   highlightOption = (idx) => () => {
@@ -130,13 +146,13 @@ class ReactToken extends React.Component {
   }
 
   selectAutoCompleteOption = (idx) => () => {
+    this.props.onAdd(this.props.autocompleteOptions[idx])
+    this.input.value = ''
     this.setState({
       hideAutocomplete: false,
       inputValue: '',
       selectedAutocompleteIdx: -1,
       tokens: [...this.state.tokens, this.props.autocompleteOptions[idx]]
-    }, () => {
-      this.input.value = ''
     })
   }
 
@@ -145,9 +161,8 @@ class ReactToken extends React.Component {
     let tokens = this.state.tokens
     tokens.splice(index, 1)
 
-    this.setState({tokens}, () => {
-      this.props.onRemove(removedToken)
-    })
+    this.setState({tokens})
+    this.props.onRemove(removedToken)
   }
 
   calcWidth(val) {
@@ -208,16 +223,20 @@ class ReactToken extends React.Component {
         paddingBottom: 10,
         backgroundColor: '#D6D5D5',
         color: '#000000',
-        zIndex: 1,
+        zIndex: -1,
         width: '100%',
         borderRadius: '3px',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        maxHeight: 160,
+        overflowY: 'auto'
       },
       option: {
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 2,
-        paddingBottom: 2
+        paddingBottom: 2,
+        border: 'none',
+        outline: 'none'
       },
       highlighted: {
         backgroundColor: '#E4E2E2'
@@ -225,7 +244,14 @@ class ReactToken extends React.Component {
     }
 
     return (
-      <div style={styles.container} className="rt-suggestions">
+      <div
+        style={styles.container}
+        ref={(r) => this.suggestions = r}
+        className="rt-suggestions"
+        role="listbox"
+        onKeyDown={this.onKeyDown}
+        onKeyUp={this.onKeyUp}
+      >
         {this.props.autocompleteOptions.map((option, idx) => {
           const style = this.state.selectedAutocompleteIdx === idx
             ? { ...styles.option, ...styles.highlighted }
@@ -233,10 +259,13 @@ class ReactToken extends React.Component {
 
           return (
             <div
+              className="rt-option"
               key={`autocomplete-${idx}`}
               onClick={this.selectAutoCompleteOption(idx)}
               onMouseOver={this.highlightOption(idx)}
+              role="option"
               style={style}
+              tabIndex={-1}
             >
               {option}
             </div>
@@ -253,21 +282,21 @@ class ReactToken extends React.Component {
 
     const styles = {
       container: {
+        backgroundColor: '#F1F1F1',
+        border: '1px solid #F1F1F1',
+        borderRadius: '3px',
         width: '100%',
         fontFamily: '"Sofia Pro", "Helvetica", "Arial", sans-serif'
       },
       ul: {
-        backgroundColor: '#F1F1F1',
-        border: '1px solid #F1F1F1',
-        borderRadius: '3px',
         cursor: 'text',
         display: 'flex',
         flexWrap: 'wrap',
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: 600,
         letterSpacing: 0,
-        lineHeight: '24px',
         listStyle: 'none',
+        margin: 0,
         padding: '4px 6px',
         position: 'relative',
         willChange: 'transform',
@@ -310,6 +339,7 @@ class ReactToken extends React.Component {
                 type="text"
                 role="combobox"
                 style={styles.input}
+                onKeyDown={this.onKeyDown}
                 onKeyUp={this.onKeyUp}
                 placeholder={this.props.placeholder}
                 onFocus={this.onFocus}
@@ -317,7 +347,7 @@ class ReactToken extends React.Component {
               />
             </div>
           </li>
-          {shouldRenderAutocomplete && this.renderAutoComplete()}
+          <li style={styles.li}>{shouldRenderAutocomplete && this.renderAutoComplete()}</li>
           {this.props.required && this.renderRequired()}
         </ul>
       </div>
@@ -326,4 +356,3 @@ class ReactToken extends React.Component {
 }
 
 export default ReactToken
-// module.exports = ReactToken
