@@ -115,6 +115,7 @@ class ReactToken extends React.Component {
       this.setState({inputValue: ''})
     } else if (e.keyCode === this.keyMap.ESC) {
       this.setState({hideAutocomplete: true})
+      this.input.focus()
     } else if (e.keyCode === this.keyMap.DOWN_ARROW && this.state.inputValue !== '') {
       const nextIdx = this.state.selectedAutocompleteIdx + 1 >= this.props.autocompleteOptions.length
         ? 0
