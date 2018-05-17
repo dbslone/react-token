@@ -2,7 +2,7 @@
   "name": "react-token",
   "version": "0.0.7",
   "description": "Token/Tag input component",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/dbslone/react-token.git"
@@ -11,7 +11,9 @@
   "bugs": "https://github.com/dbslone/react-token/issues",
   "scripts": {
     "start": "start-storybook -p 9001 -c .storybook",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "transpile": "babel src -d dist --copy-files",
+    "prepublishOnly": "npm run transpile"
   },
   "authors": [
     "David Slone"

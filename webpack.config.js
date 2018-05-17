@@ -5,9 +5,9 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'react-token.js',
-    path: path.join(__dirname, 'lib/dist'),
+    path: path.join(__dirname, 'dist'),
     libraryTarget: 'umd',
-    library: 'react-token'
+    library: 'ReactToken'
   },
   externals: {
     react: {
