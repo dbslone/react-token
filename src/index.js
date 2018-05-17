@@ -297,6 +297,7 @@ class ReactToken extends React.Component {
         fontWeight: 600,
         letterSpacing: 0,
         listStyle: 'none',
+        lineHeight: 'normal',
         margin: 0,
         padding: '4px 6px',
         position: 'relative',
