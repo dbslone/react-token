@@ -1,6 +1,6 @@
 {
   "name": "react-token",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Token/Tag input component",
   "main": "dist/index.js",
   "repository": {
