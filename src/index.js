@@ -185,11 +185,12 @@ class ReactToken extends React.Component {
     const styles = {
       container: {
         color: '#ACACAC',
+        fontSize: 12,
         fontWeight: 200,
         overflow: 'hidden',
         position: 'absolute',
         right: 10,
-        top: 8
+        top: 14
       },
       span: {
         position: 'relative',
