@@ -82,7 +82,7 @@ class ReactToken extends React.Component {
   }
 
   onKeyUp = (e) => {
-    e.preventDefault()
+    e.preventDefault() && e.stopPropagation()
 
     if (e.keyCode === this.keyMap.ENTER && this.input.value.length > 0) {
       const value = this.state.selectedAutocompleteIdx >= 0
