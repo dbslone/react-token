@@ -82,6 +82,8 @@ class ReactToken extends React.Component {
   }
 
   onKeyUp = (e) => {
+    e.preventDefault()
+
     if (e.keyCode === this.keyMap.ENTER && this.input.value.length > 0) {
       const value = this.state.selectedAutocompleteIdx >= 0
         ? this.props.autocompleteOptions[this.state.selectedAutocompleteIdx]
