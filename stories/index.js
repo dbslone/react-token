@@ -33,7 +33,7 @@ storiesOf('ReactToken', module)
   .add('with autocomplete', () => (
     <div style={{width: 500}}>
       <ReactToken
-        autocompleteOptions={['d', 'another name', 'test']}
+        autocompleteOptions={['d', 'another name', 'test', 'more', 'options', 'again', 'more', 'again', 'test']}
         placeholder="Start typing"
         selected={['test 1']}
       />
