@@ -252,8 +252,6 @@ class ReactToken extends React.Component {
     const styles = {
       container: {
         width: '100%',
-        border: '1px solid #F1F1F1',
-        padding: 5,
         fontFamily: '"Sofia Pro", "Helvetica", "Arial", sans-serif'
       },
       ul: {
