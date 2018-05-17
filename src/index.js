@@ -341,6 +341,7 @@ class ReactToken extends React.Component {
                 ref={(r) => this.input = r}
                 type="text"
                 role="combobox"
+                className="rt-input"
                 style={styles.input}
                 onKeyDown={this.onKeyDown}
                 onKeyUp={this.onKeyUp}
