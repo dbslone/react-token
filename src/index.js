@@ -219,24 +219,25 @@ class ReactToken extends React.Component {
     const styles = {
       container: {
         position: 'absolute',
-        top: '100%',
+        top: '109%',
         left: 0,
         paddingTop: 10,
         paddingBottom: 10,
-        backgroundColor: '#D6D5D5',
+        backgroundColor: '#F1F1F1',
         color: '#000000',
         zIndex: -1,
         width: '100%',
         borderRadius: '3px',
         cursor: 'pointer',
         maxHeight: 160,
-        overflowY: 'auto'
+        overflowY: 'auto',
+        border: '1px solid #E4E4E4'
       },
       option: {
         paddingLeft: 10,
         paddingRight: 10,
-        paddingTop: 2,
-        paddingBottom: 2,
+        paddingTop: 5,
+        paddingBottom: 5,
         border: 'none',
         outline: 'none'
       },
