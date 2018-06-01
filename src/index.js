@@ -82,9 +82,22 @@ class ReactToken extends React.Component {
   }
 
   onBlur = (e) => {
-    this.setState({focused: false}, () => {
-      this.props.onBlur(e)
-    })
+    let inputWidth = this.state.inputWidth
+    let tokens = this.state.tokens
+    const val = this.input.value
+
+    if (val) {
+      tokens = [...tokens, val]
+      this.input.value = ''
+      inputWidth = this.calcWidth(this.props.placeholder)
+    }
+
+    this.setState({focused: false, tokens, inputWidth})
+    this.props.onBlur(e)
+
+    if (this.state.tokens.length !== tokens.length) {
+      this.props.onAdd(val)
+    }
   }
 
   onKeyDown = (e) => {

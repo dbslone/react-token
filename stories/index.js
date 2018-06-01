@@ -47,3 +47,11 @@ storiesOf('ReactToken', module)
       />
     </div>
   ))
+  .add('on blur should create token from input', () => (
+    <div style={{width: 500}}>
+      <ReactToken
+        placeholder="Start typing"
+        required
+      />
+    </div>
+  ))
