@@ -82,6 +82,11 @@ class ReactToken extends React.Component {
   }
 
   onBlur = (e) => {
+    const shouldRenderAutocomplete = this.state.inputValue !== '' && this.props.autocompleteOptions.length > 0 && !this.state.hideAutocomplete
+    if (shouldRenderAutocomplete) {
+      return
+    }
+    
     let inputValue = this.state.inputValue
     let tokens = this.state.tokens
     const val = this.input.value

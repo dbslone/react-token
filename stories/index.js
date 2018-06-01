@@ -50,6 +50,7 @@ storiesOf('ReactToken', module)
   .add('on blur should create token from input', () => (
     <div style={{width: 500}}>
       <ReactToken
+        autocompleteOptions={['d', 'another name', 'test', 'more', 'options', 'again', 'more', 'again', 'test']}
         placeholder="Start typing"
         required
       />
