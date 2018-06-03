@@ -67,7 +67,17 @@ class ReactToken extends React.Component {
 
   onClick = (e) => {
     if (!this.container.contains(e.target)) {
-      this.setState({hideAutocomplete: true})
+      let inputValue = this.state.inputValue
+      let tokens = this.state.tokens
+      const val = this.input.value
+
+      if (val) {
+        tokens = [...tokens, val]
+        this.input.value = ''
+        inputValue = ''
+      }
+
+      this.setState({hideAutocomplete: true, tokens, inputValue})
     }
   }
 
