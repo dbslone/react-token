@@ -77,7 +77,10 @@ class ReactToken extends React.Component {
         inputValue = ''
       }
 
-      this.setState({hideAutocomplete: true, tokens, inputValue})
+      if (this.state.tokens.length !== tokens.length) {
+        this.props.onAdd(val)
+      }
+      this.setState({focused: false, hideAutocomplete: true, tokens, inputValue})
     }
   }
 
@@ -96,7 +99,7 @@ class ReactToken extends React.Component {
     if (shouldRenderAutocomplete) {
       return
     }
-    
+
     let inputValue = this.state.inputValue
     let tokens = this.state.tokens
     const val = this.input.value
