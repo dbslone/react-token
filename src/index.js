@@ -390,7 +390,7 @@ class ReactToken extends React.Component {
         </ul>
         {shouldRenderAutocomplete && this.renderAutoComplete()}
       </div>
-    );
+    )
   }
 }
 
