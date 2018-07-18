@@ -250,19 +250,22 @@ class ReactToken extends React.Component {
     const styles = {
       container: {
         position: 'absolute',
-        top: '109%',
+        marginTop: '5px',
         left: 0,
         paddingTop: 10,
         paddingBottom: 10,
+        fontSize: 14,
+        fontWeight: 600,
+        letterSpacing: 0,
         backgroundColor: '#F1F1F1',
         color: '#000000',
-        zIndex: -1,
         width: '100%',
         borderRadius: '3px',
         cursor: 'pointer',
         maxHeight: 160,
         overflowY: 'auto',
-        border: '1px solid #E4E4E4'
+        border: '1px solid #E4E4E4',
+        zIndex: 1
       },
       option: {
         paddingLeft: 10,
@@ -316,6 +319,7 @@ class ReactToken extends React.Component {
 
     const styles = {
       container: {
+        position: 'relative',
         backgroundColor: '#F1F1F1',
         border: '1px solid #F1F1F1',
         borderRadius: '3px',
@@ -334,8 +338,7 @@ class ReactToken extends React.Component {
         margin: 0,
         padding: '4px 6px',
         position: 'relative',
-        willChange: 'transform',
-        zIndex: 1
+        willChange: 'transform'
       },
       li: {
         display: 'inline-flex'
@@ -356,7 +359,7 @@ class ReactToken extends React.Component {
         outline: 'none',
         marginTop: 9,
         marginBottom: 9,
-        boxSizing: 'border-box',
+        boxSizing: 'border-box'
       }
     }
 
@@ -383,9 +386,9 @@ class ReactToken extends React.Component {
               />
             </div>
           </li>
-          <li style={styles.li}>{shouldRenderAutocomplete && this.renderAutoComplete()}</li>
           {this.props.required && this.renderRequired()}
         </ul>
+        {shouldRenderAutocomplete && this.renderAutoComplete()}
       </div>
     );
   }

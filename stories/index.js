@@ -56,3 +56,21 @@ storiesOf('ReactToken', module)
       />
     </div>
   ))
+  .add('should not overlap token input below', () => (
+    <div style={{width: 500}}>
+      <div style={{marginBottom: 10}}>
+        <ReactToken
+          autocompleteOptions={['d', 'another name', 'test', 'more', 'options', 'again', 'more', 'again', 'test']}
+          placeholder="Start typing"
+          required
+        />
+      </div>
+      <div>
+        <ReactToken
+          autocompleteOptions={['d', 'another name', 'test', 'more', 'options', 'again', 'more', 'again', 'test']}
+          placeholder="Start typing"
+          required
+        />
+      </div>
+    </div>
+  ))
