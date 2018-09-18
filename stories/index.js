@@ -74,3 +74,14 @@ storiesOf('ReactToken', module)
       </div>
     </div>
   ))
+  .add('callbacks should not fire when disabled', () => (
+    <div style={{width: 500}}>
+      <ReactToken
+        autocompleteOptions={['d', 'another name', 'test', 'more', 'options', 'again', 'more', 'again', 'test']}
+        placeholder="Start typing"
+        disabled
+        onRemove={() => alert('This function should not be invoked')}
+        selected={['token 1']}
+      />
+    </div>
+  ))
