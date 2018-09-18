@@ -189,6 +189,10 @@ class ReactToken extends React.Component {
   }
 
   removeToken = (index) => () => {
+    if (this.props.disabled) {
+      return null
+    }
+
     const removedToken = this.state.tokens[index]
     let tokens = this.state.tokens
     tokens.splice(index, 1)
