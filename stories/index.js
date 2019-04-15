@@ -85,3 +85,19 @@ storiesOf('ReactToken', module)
       />
     </div>
   ))
+  .add('Allows objects as autocomplete options', () => {
+    const addNew = (
+      <div style={{ display: 'flex', justifyContent: 'center', color: 'green', paddingTop: 10, paddingBottom: 10 }}>+ Add New</div>
+    )
+    return (
+      <div style={{width: 500}}>
+        <ReactToken
+          autocompleteOptions={['again' , 'another name', addNew]}
+          placeholder="Start typing"
+          onRemove={() => alert('This function should not be invoked')}
+          onAdd={(option) => console.log({option})}
+          selected={['token 1']}
+        />
+      </div>
+    )
+  })

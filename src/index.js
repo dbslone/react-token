@@ -178,13 +178,22 @@ class ReactToken extends React.Component {
   }
 
   selectAutoCompleteOption = (idx) => () => {
-    this.props.onAdd(this.props.autocompleteOptions[idx])
+    const option = this.props.autocompleteOptions[idx]
+    this.props.onAdd(option)
     this.input.value = ''
+
+    // If autocomplete option is a react element then don't automatically add to
+    // the selected token list. Consumer should be responsible for updating the
+    // selected prop with a text value.
+    const tokens = typeof option === 'object'
+      ? this.state.tokens
+      : [...this.state.tokens, this.props.autocompleteOptions[idx]]
+
     this.setState({
       hideAutocomplete: false,
       inputValue: '',
       selectedAutocompleteIdx: -1,
-      tokens: [...this.state.tokens, this.props.autocompleteOptions[idx]]
+      tokens
     })
   }
 
