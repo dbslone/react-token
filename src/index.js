@@ -55,7 +55,7 @@ class ReactToken extends React.Component {
     window.addEventListener('click', this.onClick)
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.selected !== nextProps.selected) {
       this.setState({tokens: nextProps.selected})
     }
